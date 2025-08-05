@@ -1,0 +1,11 @@
+plugin: netbird_inventory
+
+host: api.netbird.io          # or "netbird.mydomain.com:33073" for self-host
+api_token: "{{ lookup('env', 'NETBIRD_APIKEY') }}"
+
+# optional
+# validate_certs: true
+timeout: 30                   # seconds
+base_path: /api               # default is /api
+cache: true                   # honour Ansible’s generic cache options
+cache_timeout: 600
