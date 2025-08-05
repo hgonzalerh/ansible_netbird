@@ -5,16 +5,10 @@ NetBird dynamic *inventory* plugin for Ansible.
 *   One Ansible host for every NetBird **peer**.
 *   **All** peer attributes are exposed as host variables, so you can still
     group with `keyed_groups` in your YAML inventory source if you want.
-*   TLS certificate verification is controlled by the standard
-    ``validate_certs`` option (default **True**).
+*   underlying netbird module in python does not understand certificate validation, pending on pull request to upstream
 *   The ``host`` option **may include a custom port**—for example
     ``netbird.example.com:33073``—and the value is forwarded verbatim to the
     NetBird SDK.
-
-Quick test after dropping this file in a plugin path and creating an
-``inventory/netbird.yml`` source:
-
-    ansible-inventory -i inventory/ --graph -vvvv
 """
 from __future__ import annotations
 
