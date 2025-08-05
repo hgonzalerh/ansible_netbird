@@ -1,4 +1,4 @@
-# my_netbird_collection/plugins/inventory/netbird_inventory.py
+# netbird/plugins/inventory/netbird_inventory.py
 """
 NetBird dynamic *inventory* plugin for Ansible.
 
@@ -33,7 +33,7 @@ options:
   plugin:
     description: Must be set to this plugin’s FQCN.
     required: true
-    choices: ["my_netbird_collection.netbird_inventory"]
+    choices: ["hugonz.netbird.netbird_inventory"]
   host:
     description: >
       NetBird API hostname **without scheme**. You may append a custom port,
@@ -45,10 +45,6 @@ options:
     required: true
     type: str
     no_log: true
-  validate_certs:
-    description: Verify TLS certificates when connecting over HTTPS.
-    type: bool
-    default: true
   timeout:
     description: HTTP timeout in seconds.
     type: int
@@ -63,7 +59,7 @@ options:
 class InventoryModule(BaseInventoryPlugin):
     """Dynamic inventory plugin for NetBird peers (no Constructable mix‑in)."""
 
-    NAME = "my_netbird_collection.netbird_inventory"
+    NAME = "hugonz.netbird.netbird_inventory"
 
     def verify_file(self, path):
         """Return *True* if this is a YAML file meant for this plugin."""
@@ -78,7 +74,6 @@ class InventoryModule(BaseInventoryPlugin):
         # ------------------------------------------------------------------
         host = self.get_option("host")
         api_token = self.get_option("api_token")
-        validate_certs = self.get_option("validate_certs")
         timeout = self.get_option("timeout")
         base_path = self.get_option("base_path")
 
@@ -102,7 +97,6 @@ class InventoryModule(BaseInventoryPlugin):
                 host=host,
                 api_token=api_token,
                 use_ssl=True,
-                verify_ssl=validate_certs,
                 timeout=timeout,
                 base_path=base_path,
             )
